@@ -1,0 +1,11 @@
+// Recompile Bootstrap avec la couleur de marque de Cinéra. Les variables
+// --bs-primary etc. (exposées au runtime) ne suffisent pas : Bootstrap compile
+// ses boutons, badges, liens... avec des valeurs littérales dérivées de $primary
+// au moment du build Sass, pas via la variable CSS. Il faut donc recompiler.
+
+$primary: #e0a940;
+
+// Bootstrap choisit automatiquement un texte clair ou sombre sur chaque couleur
+// de thème via color-contrast() ; $primary étant assez clair (or), ça doit
+// suffire à obtenir un texte sombre lisible sur les boutons/badges "primary".
+@import 'bootstrap/scss/bootstrap';
