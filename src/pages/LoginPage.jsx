@@ -63,7 +63,7 @@ function LoginPage() {
                         </Button>
                     </Form>
                     <p className='text-center mt-4 mb-0 small text-muted'>
-                        Pas encore de compte ? <Link to='/register'>Créer un compte</Link>
+                        Pas encore de compte ? <Link to='/register' state={location.state}>Créer un compte</Link>
                     </p>
                 </Card.Body>
             </Card>

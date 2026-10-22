@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { Card, Form, Button, Alert } from 'react-bootstrap'
 import Logo from '../components/layout/Logo.jsx'
 import useForm from '../hooks/useForm.js'
@@ -9,6 +9,7 @@ import { registerUser, selectAuthStatus, selectAuthError } from '../features/aut
 function RegisterPage() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const location = useLocation()
     const status = useSelector(selectAuthStatus)
     const serverError = useSelector(selectAuthError)
     const { values, handleChange } = useForm({
@@ -38,7 +39,8 @@ function RegisterPage() {
         }))
 
         if (registerUser.fulfilled.match(result)) {
-            navigate('/', { replace: true })
+            const redirectTo = location.state?.from?.pathname ?? '/'
+            navigate(redirectTo, { replace: true })
         }
     }
 
@@ -106,7 +108,7 @@ function RegisterPage() {
                         </Button>
                     </Form>
                     <p className='text-center mt-4 mb-0 small text-muted'>
-                        Déjà un compte ? <Link to='/login'>Se connecter</Link>
+                        Déjà un compte ? <Link to='/login' state={location.state}>Se connecter</Link>
                     </p>
                 </Card.Body>
             </Card>

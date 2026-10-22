@@ -20,12 +20,22 @@ function App() {
       <AppNavbar />
       <Container className='pb-5 flex-grow-1'>
         <Routes>
+          {/* L'accueil reste public (vitrine) ; tout le reste nécessite un compte. */}
           <Route path='/' element={<HomePage />} />
-          <Route path='/discover' element={<DiscoverPage />} />
-          <Route path='/search' element={<SearchPage />} />
-          <Route path='/movie/:id' element={<MovieDetailPage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
+          <Route
+            path='/discover'
+            element={<RequireAuth><DiscoverPage /></RequireAuth>}
+          />
+          <Route
+            path='/search'
+            element={<RequireAuth><SearchPage /></RequireAuth>}
+          />
+          <Route
+            path='/movie/:id'
+            element={<RequireAuth><MovieDetailPage /></RequireAuth>}
+          />
           <Route
             path='/favorites'
             element={<RequireAuth><FavoritesPage /></RequireAuth>}
